@@ -1,0 +1,106 @@
+ATIVIDADE 4 27/06/2022 - LISTAS
+Atividade em sala
+
+//1.Defina uma lista de bandas favoritas
+//Remova os 2 últimos valores
+//Adicione 3 outros valores após
+List <String> Bandas = New List <String>();
+Bandas.add ('Pink Floyd ');
+Bandas.add ('Metálica ');
+Bandas.add ('Rammstein ');
+Bandas.add ('Jhonny Cash ');
+Bandas.add ('Scorpions ');
+Bandas.add ('Black Sabbath ');
+System.debug(Bandas);
+Bandas.remove (5);
+Bandas.remove (4);
+System.debug(Bandas);
+Bandas.add('Sodom');
+Bandas.add('Amon Amarth');
+Bandas.add('Steppenwolf');
+System.debug(Bandas);
+
+--------------------------------------------
+//2.Crie uma lista com 8 itens já pré definidos
+//Coloque um valor aleatório como posição 3
+//Adicione uma nova posição com um valor aleatório
+
+//Remova o valor da nova posição
+List <String> AL = New List <String>{
+    '0', '1', '2', '3', '4', '5', '6', '7', '8'
+};
+System.debug(AL);
+AL.set (3, '12');
+System.debug(AL);
+AL.add('\n25');
+System.debug(AL);
+Al.remove(9);
+System.debug(AL);
+
+------------------------------------------------
+//2.1 Math Random
+//Crie uma lista com 8 itens já pré definidos
+//Coloque um valor aleatório como posição 3
+//Adicione uma nova posição com um valor aleatório
+
+//Remova o valor da nova posição
+List <integer> AL = New List <integer>{
+    0, 1, 2, 3, 4, 5, 6, 7, 8
+};
+System.debug(AL);
+AL.set (3, (integer.valueof(Math.random() * 20 )));
+System.debug(AL);
+AL.add(25);
+System.debug(AL);
+Al.remove(9);
+System.debug(AL);
+
+---------------------------------------------
+//3.Criar uma lista de numeros aleatórios com idades
+//diferentes
+//gerar a média entre os valores
+//verificar se existe um valor dentro da lista e armazenar em
+//uma variável booleana
+//Obter o maior número da lista
+//Obter o menor número da lista
+
+List<Decimal> IA = new List<Decimal>();
+IA.add(Integer.valueof(system.Math.random() * 70 ));
+IA.add(Integer.valueof(system.Math.random() * 70 ));
+IA.add(Integer.valueof(system.Math.random() * 70 ));
+IA.add(Integer.valueof(system.Math.random() * 70 ));
+System.debug(IA);
+
+IA.sort();
+
+System.debug(IA[0]);
+System.debug(IA[2]);
+System.debug('Média = ' + ((IA[0] + IA[1] + IA[2] + IA[3])/4).setscale(2));
+Boolean Contem = IA.contains(30);
+System.debug(Contem);
+
+-------------------------------------------------
+//4.Criar uma lista de decimais
+//antes de adicionar algum valor, verificar se a lista está
+//vazia
+//adicionar 5 valores
+//somar o 1 e o último valor
+//limpar toda a lista
+//armazenar em uma variável a quantidade de valores
+//que tem na lista
+
+
+List<Decimal> VA = new List<Decimal>();
+System.debug(VA);
+System.debug(VA.isempty());
+
+VA.add(Integer.valueof(system.Math.random() * 70 ));
+VA.add(Integer.valueof(system.Math.random() * 70 ));
+VA.add(Integer.valueof(system.Math.random() * 70 ));
+VA.add(Integer.valueof(system.Math.random() * 70 ));
+
+System.debug(VA);
+System.debug(VA.isempty());
+System.debug(VA[0]+VA[3]);
+Integer Contagem = VA.Size();
+System.debug('Contagem de elementos = ' + Contagem);
