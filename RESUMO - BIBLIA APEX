@@ -1,0 +1,202 @@
+22/06/2022 APEX VARIÁVEIS E OPERADORES
+
+//Hello world!! Comando de saída
+/* 
+	System.debug('')
+-comando de saida de dados
+-imprime algo na tela
+
+ponto e vírgula (;) - fim de um determinado comando
+*/
+System.debug('Hello World');
+
+---------------------------------------------------
+System.debug('Pedro Mocock 30 anos');
+
+---------------------------------------------------
+//uso de variaveis integer
+
+integer ClientesEmPotencial = 35;
+//TipoDeDado NomeDaVariavel
+system.debug(ClientesEmPotencial);
+//imprimir texto clientes em potencial
+String Txt = 'oi eu sou um texto';
+System.debug('texto normal' + Txt + ClientesEmPotencial);
+//imprimir texto normal: oi eu sou um texto + (clientes em potencial)
+
+-----------------------------------------------------
+//Declarando Variáveis
+//Inteiro
+integer ClientesEmPotencial = 36;
+//Decimal
+decimal AvaliacaoDeProduto = 4.9;
+//Booleana
+boolean StatusProduto = True;
+//imprimir os dados no debug
+system.debug(ClientesEmPotencial);
+system.debug(AvaliacaoDeProduto);
+system.debug(StatusProduto);
+
+----------------------------------------------------
+//Declarando Variáveis
+//Double
+double calculoaleatorio = 10000/5000;
+//Date
+date niver = date.newInstance(1992, 05, 04);
+system.debug(calculoaleatorio);
+system.debug(niver);
+
+----------------------------------------------------
+//string é uma classe
+string txt = 'sim senhor';
+string txt2 = 'eu sou um texto ';
+
+system.debug(txt2);
+system.debug('Oi você é mesmo um texto? ' + txt2 + txt);
+
+//capitalize primeira letra maiúscula
+system.debug(txt.capitalize());
+
+//função contais, verifica se contem string de texto
+system.debug('possuo senhor? '+txt.contains('senhor'));
+
+//função toUpperCase e toLowerCase, Caixa alta e Caixa baixa
+System.debug('Caixa alta: ' + txt.toUpperCase());
+System.debug('Caixa baixa: ' + txt2.toLowerCase());
+
+//função remove,  remove um texto 
+System.debug('remover texto ' + txt.remove('texto'));
+System.debug('remover sim ' + txt2.remove('sim'));
+
+-----------------------------------------------------
+//operadores lógicos
+//TipoDeDado NomeDaVariavel = ValorDaVariavel
+integer a = 10;
+integer b = 20;
+integer c = 30;
+integer d = 40;
+//TipoDeDado NomeDaVariavel
+integer s, sb, m, div;
+//ValorDaVariavel
+s = a + b;
+sb = d - c;
+m = b * c;
+div = d / a;
+
+system.debug('+ ' + s);    
+system.debug('- ' + sb);
+system.debug('* ' + m);
+system.debug('/ ' + div);
+
+//Incremento ++
+system.debug('++' + (a++));
+system.debug(a);
+
+//Decremento -- 
+system.debug('--' + (a--));
+system.debug(a);
+
+----------------------------------------------------
+//exemplo de if
+integer variavel = 1;
+System.debug('Variável ' + variavel);
+if(variavel>=0){
+    System.debug('variável positiva');}
+else{System.debug('variável negativa');}
+variavel--;
+variavel--;
+system.debug('Variável ' + variavel);
+if(variavel>=0){
+    System.debug('variável positiva');}
+else{System.debug('variável negativa');}
+
+----------------------------------------------------
+22/06/2022
+// Operadores lógicos
+= atribuição
++ adição
+- subtração
+* multiplicação
+/ divisão
+++ incremento
+-- decremento
++= atribuição de adição
+-= atribuição de subtração
+*= atribuição de multiplicação
+/= atribuição de divisão
+== igualdade
+!= diferença
+< menor que
+> maior que
+<= menor ou igual a
+>= maior ou igual a
+! não
+&& e (and)
+|| ou (or) [ alt + 5555 ││ ]
+cond? true: false operador ternário
+//operador ternário
+
+
+----------------------------------------------------------------
+//Estrutura de repetição - Loop, Laço de repetição
+For (para)
+While (enquanto)
+Do (faça)
+
+for(variável inicial ; condição ; incremento ou decremento)
+{
+	Comandos devem ser repetidos
+}
+
+
+while(condição){
+	comandos internos do loop
+	++-- incremento/decremento
+}
+
+------------------------------------------------------------------
+//Listas
+//List<TipoDeDado> nome da lista = new List<TipoDeDado>{};
+List<String> CidadesDoBrasil = new List<String>{
+    'Taubaté', 'Recife', 'Sobral', 'São Paulo', 'Rio de Janeiro'
+};
+//Exibir lista toda
+System.debug(CidadesDoBrasil);
+
+//Exibir apenas 1 valor da lista
+System.debug(CidadesDoBrasil[1]);
+
+//Exibir mais de um valor da lista
+System.debug(CidadesDoBrasil[1] + CidadesDoBrasil[2]);
+
+//List<TipoDeDado> nome da lista = new List<TipoDeDado>{};
+List<String> Frutas = new List<String>(3);
+Frutas[1] = 'Banana';
+Frutas[0] = 'Laranja';
+Frutas[2] = 'Maçã';
+
+//Falha no engano, não tem espaço
+Frutas[3] = 'Pêra'
+
+//função de adicionar elementos na minha lista
+// add() ->> eh uma função que insere valores na lista =D
+// nomeDaLista.add(valor);
+
+-----------------------------------------------
+//27/06/2022 - FUNÇÃO SET
+//Função SET
+Set<String> C = new Set<String>{'Preto', 'Vermelho','Azul','Rosa', 'Amarelo'};
+    System.debug(C);
+//Adicionar informações dentro do SET
+//Função add
+//Nova cor
+C.add('Cinza');
+C.add('Ciano');
+System.debug(C);
+//remove
+C.remove('Cinza');
+System.debug(C);
+//Contains
+System.debug('Tem vermelho ? ' + C.contains('Vermelho'));
+System.debug('Tem Cinza ? ' + C.contains('Cinza'));
+//
