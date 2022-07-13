@@ -1,0 +1,53 @@
+12/07/2022 - TRIGGER
+
+// TRIGGER 
+trigger AccountTrigger on Account (before insert) {
+    System.debug('eu estou sendo acionado');
+}
+// Trigger simples 1 before
+
+trigger AccountTrigger on Account (before insert, Before Update) {
+    System.debug('eu estou sendo acionado');
+}
+
+//Trigger 2 before
+
+trigger AccountTrigger on Account (before insert, Before Update, After Delete, After Undelete) {
+    System.debug('eu estou sendo acionado');
+}
+
+//Trigger com 2 before e 2 after
+
+//APEX
+Account Co1 = New Account (
+	Name = 'Conta maluca',
+    Rating = 'Hot',
+    Phone = '88998877',
+    AnnualRevenue = 5000
+);
+
+Insert Co1;
+
+Account Co1 = New Account (
+	Name = 'Conta maluca',
+    Rating = 'Hot',
+    Phone = '88998877',
+    Id = '0018a00001txA4fAAE',
+    AnnualRevenue = 5000
+);
+
+Update Co1;
+
+Account Co1 = New Account (
+    Id = '0018a00001txA4fAAE'
+	);
+
+Undelete Co1;	
+
+Account Co1 = New Account (
+    Id = '0018a00001txA4fAAE'
+	);
+Delete Co1;
+
+------------------------------------------------------------
+

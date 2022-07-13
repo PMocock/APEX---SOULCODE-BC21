@@ -1,0 +1,81 @@
+07/07/2022 PESQUISA
+
+1. selecione nome, receita anual, tipo de conta com receita anual > 100000 e o nome e valor  das oportunidades com valor maior que 50000.
+SELECT Id, AnnualRevenue, Name, Type, (SELECT Name, Amount FROM Opportunities WHERE Amount > 50000)FROM Account WHERE AnnualRevenue > 100000
+
+2.selecione nome, tipo de conta, os nomes das oportunidades e os nomes dos contatos associados a conta
+SELECT Id, Name, Type, (SELECT Name FROM Opportunities), (SELECT Name FROM Contacts) FROM Account
+
+---------------------------------------------------------------
+//1. Retorne todas as contas agrupadas pelo tipo de Negócio
+SELECT Name, Industry FROM Account GROUP BY Industry, Name
+
+//2. Selecione o nome, o cargo, o telefone, o nome da conta dos contatos com cargo CEO
+SELECT Id, Title, Phone, Name FROM Contact WHERE Title Like 'CEO%'
+
+//3. Selecione o valor, fase, nome da conta e telefone da conta da oportunidade onde o nome da conta possui Oil
+SELECT Id, Amount, Stagename, Account.Name FROM Opportunity WHERE Account.Name LIKE '%Oil%'
+
+//4. Selecione o nome, celular, cargo, nome da conta e classificação da conta dos contatos onde a classificação da conta é Hot
+SELECT Id, Name, Phone, Title, Account.Name, Account.Rating FROM Contact WHERE Account.Rating = 'Hot'
+
+//5. Selecione o nome, classificação e receita anual de conta onde classificação seja diferente de Hot, e o nome das oportunidades associadas a elas onde o valor da oportunidade esteja entre 10000 e 50000
+SELECT Id, Name, Rating, Annualrevenue, (SELECT name FROM Opportunities WHERE Amount >= 10000 And Amount <= 50000) FROM Account WHERE Rating != 'Hot'
+
+//6. Selecione o nome da conta onde o nome inicia com Oil or Ed, trazendo os nomes dos contatos associados a eles com inicio em B ou A
+SELECT Id, Name, (SELECT Name FROM Contacts WHERE Name LIKE 'A%' OR Name LIKE 'B%') FROM Account WHERE Name LIKE 'Oil%' OR Name LIKE 'Ed%'
+
+-----------------------------------------------------------------------------------------------------
+//DESAFIO AULA DO NANA
+//16:15 CRIAR OBJETO Sistema__c com campo de Valor__c, criar registros e através da janela anônima apex
+//Puxar informações dos campos dos registros do objeto salesforce através de Lista.
+
+List<Sistema__c> Listasistema = [Select Id, Name, Valor__c From Sistema__c];
+
+for(Sistema__c sistemas : Listasistema){
+System.debug('Informações do sistema!');    
+System.debug('Nome: ' + sistemas.Name);
+System.debug('Valor = R$ ' + sistemas.Valor__c);
+System.debug('\n');
+}
+
+//Puxar informações dos campos dos registros do objeto salesforce através de um Map
+
+-----------------------------------------------------------------------------------------------
+
+1. Selecione o nome, valor e data de fechamento das oportunidades.
+1.1 SELECT Id, Name, Amount, Closedate FROM Opportunity
+
+2. Selecione o nome e valor das oportunidades com data de fechamento maior que 01/06/2021.
+2.1 SELECT Id, Name, Amount FROM Opportunity WHERE Closedate > 2022-06-01
+
+3. Selecione o nome da oportunidade, valor, descrição e next step das oportunidades com fase Closed won e valor acima de 100000.
+3.1 SELECT Id, Name, Amount, Description, Nextstep FROM Opportunity WHERE Stagename = 'Closed Won' AND Amount > 100000
+
+4. Selecione o nome, classificação, tipo, ano de início das contas que possuam ‘Uni’ no começo do nome da conta.
+4.1 SELECT Id, Name, Rating, Type, Createddate FROM Account WHERE Name Like 'Uni%'
+
+5. Selecione o nome completo, empresa e email dos leads com ‘.net’ no final do email e status do lead como Working - Contacted.
+5.1 SELECT Id, Firstname, Lastname, Company, Email FROM Lead WHERE Email LIKE '%.net' AND Status = 'Working - Contacted'
+
+6. Selecione o nome e conte a quantidade de oportunidades agrupadas por nome.
+6.1 SELECT Name, Count(Id) FROM Opportunity GROUP BY Name
+
+7. Selecione o nome e conte a quantidade de oportunidades agrupadas por nome havendo 3 oportunidades agrupadas.
+7.1 SELECT Name, Count(Id) FROM Opportunity GROUP BY Name HAVING Count(Id) >= 3 ORDER BY Name
+
+8. Selecione o nome, valor, fase, next step e descrição das oportunidades que possuem ‘Oil’ ou ‘Gene’ em qualquer parte do nome.
+8.1 SELECT Id, Name, Amount, Stagename, Nextstep, Description FROM Opportunity WHERE Name LIKE '%Oil%' OR Name LIKE '%Gene%'
+
+
+9. Selecione o nome, valor, fase, data de criação e data de fechamento das oportunidades com fase ‘Closed Won’ e valor menor que 80000, exiba os valores formatados, ordenado por valor de maneira decrescente.
+9.1 SELECT Id, Name, Amount, Stagename, Createddate, Closedate FROM Opportunity WHERE Stagename = 'Closed Won' AND Amount < 80000 ORDER BY Amount DESC
+
+10. Selecione o nome, telefone de contas e o nome, valor e fase das oportunidades ligadas a cada conta.
+10.1 SELECT Id, Name, Phone, (SELECT Name, Amount, Stagename FROM Opportunities) FROM Account 
+
+11. Selecione o nome, de contas ordenadas pelo nome da conta. E ligada a cada conta, mostre o nome e valor das oportunidades e mostre também nome dos contatos que tem nome iniciando com A, associados a cada conta.
+11.1 SELECT Id, Name, (SELECT Name, Amount FROM Opportunities), (SELECT Id, Name FROM Contacts WHERE Name LIKE 'A%') FROM Account
+
+12. Selecione o nome, fase, next step e valor das oportunidades com valor abaixo de 100000 e com fechamento ocorrido no trimestre passado.
+12.1 SELECT Id, Name, Stagename, Nextstep, Amount FROM Opportunity WHERE Amount <= 100000 AND CloseDate > 2022-04-08

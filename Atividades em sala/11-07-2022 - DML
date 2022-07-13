@@ -1,0 +1,165 @@
+// 11/07/2022 
+//Insira 5 registros em Contas com valores variados nos campos de name, rating, type, phone e website.
+
+Account RBohr = new Account(
+	Name = 'Rutherford Bohrbão',
+	Phone = '36999887',
+	Type = 'Prospect',
+    Rating = 'Hot',
+    Website = 'www.umcavalomorto.com.br'
+);
+
+insert Rbohr;
+
+Account Kobe = new Account(
+	Name = 'Kobe The Black Mamba Bryant',
+	Phone = '5556669998745',
+	Type = 'Customer - Channel',
+    Rating = 'Warm',
+    Website = 'www.KBryant.com.br'
+);
+
+insert Kobe;
+
+Account DRod = new Account(
+	Name = 'Dennis F. Rodman',
+	Phone = '5556669998745',
+	Type = 'Instalation Partner',
+    Rating = 'Cold',
+    Website = 'www.DRod.com.br'
+);
+
+insert DRod;
+
+Account ACrowley = new Account(
+	Name = 'Edward Alexander Crowley',
+	Phone = '5556669998745',
+	Type = 'Customer Direct',
+    Rating = 'Warm',
+    Website = 'www.Darkness.com.br'
+);
+
+insert ACrowley;
+
+Account CaoChu = new Account(
+	Name = 'CÃO QUE CHUPA MANGA E BEBE LEITE',
+	Phone = '5556669998745',
+	Type = 'Prospect',
+    Rating = 'Hot',
+    Website = 'www.CaoKiChupaManga.com.br'
+);
+
+insert CaoChu;
+
+//Insira 5 registros em Leads com valores variados nos campos de Nome completo, Empresa, Estado, Email e Status do lead.
+
+Lead RBohr = new Lead(
+	First Name = 'Rutherford',
+    Last Name = 'Bohr',
+    Company = 'Mustang Morto',
+    State = 'Hell',
+    Phone = '5556669998745',
+    Email = 'Ruther@ford.Bohr',
+    Status = 'Open - Not Contacted'
+);
+
+insert RbohrLead;
+
+Lead KBryantLead = new Lead(
+	First Name = 'Kobe',
+    Last Name = 'Bryant',
+    Company = 'Black Mamba',
+    State = 'Hell',
+    Phone = '5556669998745',
+    Email = 'Black@Mamba.com',
+    Status = 'Working - Contacted'
+);
+
+insert KBryantLead;
+
+Lead DRodLead = new Lead(
+	First Name = 'Dennis',
+    Last Name = 'Rodman',
+    Company = 'ToughBoy Game',
+    State = 'High AF',
+    Phone = '5556669998745',
+    Email = 'Dennis@Rodman.com',
+    Status = 'Closed - Not Converted'
+);
+
+insert DRodLead;
+
+Lead SataLead = new Lead(
+	First Name = 'Lucifer',
+    Last Name = 'Morningstar',
+    Company = 'Hellfire Sports',
+    State = 'Hell',
+    Phone = '5556669998745',
+    Email = 'Satanás@Lead.com',
+    Status = 'Closed - Converted'
+);
+
+insert SataLead;
+
+Lead AbimaLead = new Lead(
+	First Name = 'Bima',
+    Last Name = 'Abimael',
+    Company = 'Tortura e sofrimento pela eternidade',
+    State = 'Pernambuco',
+    Email = 'Abimael@Lead.com',
+    Phone = '5556669998745',
+    Status = 'Closed - Converted'
+);
+
+insert AbimaLead;
+
+//Insira 5 registros em Contato com valores variados nos campos de Nome Completo, Cargo, Telefone, Departamento, Fax
+
+Contact RuthBohr = new Contact(
+	First Name = 'Rutherford',
+    Last Name = 'Bohr',
+    Title = 'Comprador',
+    Department = 'Compras',
+    Phone = '5556669998745',
+    Fax = '66547789',
+    Status = 'Open - Not Contacted'
+);
+
+insert Ruthbohr;
+
+//Insira 10 novos registros em conta utilizando campos obrigatórios e mais dois campos realizar a inserção através de LISTA
+
+
+
+
+
+
+// EXEMPLO VINCULAÇÃO DE ID (ACCOUNT ID)
+
+Account A1 = New Account(
+	Name = 'Konoha BC 21',
+    Phone = '8877',
+    Rating = 'Cold'
+);
+Insert A1;
+
+Contact Naruto = New Contact(
+	Firstname = 'Naruto',
+    Lastname = 'Uzumaki',
+    AccountId = A1.id
+);
+Insert Naruto;
+
+Contact Rick = New Contact(
+	Firstname = 'Rick',
+    Lastname = 'Sanchez',
+    AccountId = A1.id
+);
+Insert Rick;
+
+--------------------------------------------------------
+//Atualizar uma conta de sua escolha (id), alterando os valores dos campos nome, telefone, classificação para os valores Apexson LTDA, 8877, Hot respectivamente.
+
+
+
+-------------------------------------------------------------
