@@ -1,0 +1,188 @@
+ATIVIDADE 4 27/06/2022 - LISTAS
+Atividade em sala
+
+//1.Defina uma lista de bandas favoritas
+//Remova os 2 últimos valores
+//Adicione 3 outros valores após
+List <String> Bandas = New List <String>();
+Bandas.add ('Pink Floyd ');
+Bandas.add ('Metálica ');
+Bandas.add ('Rammstein ');
+Bandas.add ('Jhonny Cash ');
+Bandas.add ('Scorpions ');
+Bandas.add ('Black Sabbath ');
+System.debug(Bandas);
+Bandas.remove (5);
+Bandas.remove (4);
+System.debug(Bandas);
+Bandas.add('Sodom');
+Bandas.add('Amon Amarth');
+Bandas.add('Steppenwolf');
+System.debug(Bandas);
+
+--------------------------------------------
+//2.Crie uma lista com 8 itens já pré definidos
+//Coloque um valor aleatório como posição 3
+//Adicione uma nova posição com um valor aleatório
+
+//Remova o valor da nova posição
+List <String> AL = New List <String>{
+    '0', '1', '2', '3', '4', '5', '6', '7', '8'
+};
+System.debug(AL);
+AL.set (3, '12');
+System.debug(AL);
+AL.add('\n25');
+System.debug(AL);
+Al.remove(9);
+System.debug(AL);
+
+------------------------------------------------
+//2.1 Math Random
+//Crie uma lista com 8 itens já pré definidos
+//Coloque um valor aleatório como posição 3
+//Adicione uma nova posição com um valor aleatório
+
+//Remova o valor da nova posição
+List <integer> AL = New List <integer>{
+    0, 1, 2, 3, 4, 5, 6, 7, 8
+};
+System.debug(AL);
+AL.set (3, (integer.valueof(Math.random() * 20 )));
+System.debug(AL);
+AL.add(25);
+System.debug(AL);
+Al.remove(9);
+System.debug(AL);
+
+---------------------------------------------
+//3.Criar uma lista de numeros aleatórios com idades
+//diferentes
+//gerar a média entre os valores
+//verificar se existe um valor dentro da lista e armazenar em
+//uma variável booleana
+//Obter o maior número da lista
+//Obter o menor número da lista
+
+List<Decimal> IA = new List<Decimal>();
+IA.add(Integer.valueof(system.Math.random() * 70 ));
+IA.add(Integer.valueof(system.Math.random() * 70 ));
+IA.add(Integer.valueof(system.Math.random() * 70 ));
+IA.add(Integer.valueof(system.Math.random() * 70 ));
+System.debug(IA);
+
+IA.sort();
+
+System.debug(IA[0]);
+System.debug(IA[2]);
+System.debug('Média = ' + ((IA[0] + IA[1] + IA[2] + IA[3])/4).setscale(2));
+Boolean Contem = IA.contains(30);
+System.debug(Contem);
+
+-------------------------------------------------
+//4.Criar uma lista de decimais
+//antes de adicionar algum valor, verificar se a lista está
+//vazia
+//adicionar 5 valores
+//somar o 1 e o último valor
+//limpar toda a lista
+//armazenar em uma variável a quantidade de valores
+//que tem na lista
+
+
+List<Decimal> VA = new List<Decimal>();
+System.debug(VA);
+System.debug(VA.isempty());
+
+VA.add(Integer.valueof(system.Math.random() * 70 ));
+VA.add(Integer.valueof(system.Math.random() * 70 ));
+VA.add(Integer.valueof(system.Math.random() * 70 ));
+VA.add(Integer.valueof(system.Math.random() * 70 ));
+
+System.debug(VA);
+System.debug(VA.isempty());
+System.debug(VA[0]+VA[3]);
+Integer Contagem = VA.Size();
+System.debug('Contagem de elementos = ' + Contagem);
+
+------------------------------------------------------
+ATIVIDADE 27/06/2022
+
+//1. crie uma Lista  de valores String com 8 nome de séries.
+//Mostre em formato de ranking esses valores da lista. 
+Integer R = 0;
+List <String> S = New List <String>();
+S.add ('Rick and Morty');
+S.add ('Black Mirror');
+S.add ('The Big Bang Theory');
+S.add ('Vikings');
+S.add ('Peaky Blinders');
+S.add ('Stranger Things');
+S.add ('The Boyz');
+S.add ('Love, Death and Robots');
+System.debug(S);
+While(R<=7){
+    System.debug((R+1) + 'º  -  ' + S[R]);
+    R++;
+}
+
+------------------------------------------------------------
+//2. Crie um Map com chave e valores String. Com os valores abaixo, respectivamente:
+//key - valor
+//empresa - mamaco corp
+//ceo - romero brito
+//valor - 8000000
+//cnpj - 1233210001-99
+
+Map<String,String> C = new Map<String,String>();
+C.put('Empresa' , 'MamacoCorp');
+C.put('Valor' ,'8.000.000,00');
+C.put('CEO' , 'Romero Britto');
+C.put('CNPJ' , '1233210001-99');
+System.debug(C);
+System.debug('A '+C.get('Empresa')+' Alcançou o valor de mercado de R$ '+C.get('Valor')+ 
+             '. O CEO '+C.get('CEO') + 'declarou ser o primeiro passo para dominar o mundo!');
+
+
+---------------------------------------------------------
+//3. Crie uma estrutura de SET com nome de 10 colegas de sala,e verifique se 
+//dentro da estrutura contém os alunos (Bruno, Rawana, Alyce). 
+//Depois adicione os alunos (Ralffer, Pedro e Marcos)
+
+set<string> A  =  new set<string>();
+    A.add ('Alyne');
+    A.add ('Rawana');
+    A.add ('Patrícia');
+    A.add ('Lucyanna');
+    A.add ('Fábio');
+    A.add ('Marcos');
+    A.add ('Débora');
+    A.add ('Bruno\n');
+    A.add ('Anderson');
+    A.add ('Tamires');
+    A.add ('Roberta');
+    
+System.debug('Lista de Alunos BC21 : ' + A);
+system.debug( 'Existe Alyne? ' + A.contains ('Alyne') );
+system.debug('Existe Bruno? ' + A.contains ('Bruno') );
+system.debug('Existe Rawana? ' + A.contains ('Rawana') );
+
+A.add('Pedro');
+A.add('Marcos');
+A.add('Ralffer');
+System.debug('Lista de Alunos BC21 : ' + A);
+
+-----------------------------------------------------
+// 4. Descreva o conceito de Classe e de exemplos de possíveis classes.
+
+//R. Dentro do escopo da Programação Orientada ao Objeto, a Classe representa a definição de um conjunto de características possíveis dentro de um objeto. De forma que, por exemplo, para representar a classe cliente, através de um objeto cujas Atributos e Métodos serão definidos em cada objeto conforme suas características distintas: Nome, CNPJ, Email, Telefone, Data de Abertura, etc... 
+
+----------------------------------------------------
+//5. O que é o encapsulamento, tente exemplificar o mesmo.
+
+//R. Encapsulamento é quando se oculta uma informação, através de acesso específico. Tem como proposta a manutenção do bom funcionamento do sistema em questões inclusive de segurança.
+
+------------------------------------------------------
+//6.Qual a diferença entre Herança e Polimorfismo?
+
+//R. Herança é aquela em que uma nova classe é criada e herda as propriedades de uma classe já existente. Já o Polimorfismo é aquele em que podemos realizar uma tarefa de várias formas ou maneiras.
