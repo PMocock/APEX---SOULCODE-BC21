@@ -1,0 +1,305 @@
+//AULA INVERTIDA 2 -
+//CONCEITOS DE POO / PILARES DE POO / NOSSA PRIMEIRA CLASSE
+
+//EXEMPLO 1 PERSPECTIVA DE GILDO LANCHES
+//3 CLASSES - BEBIDAS / LANCHES / PEDIDO
+//LANCHES - NOME LANCHE / VALOR / TROCO
+//BEBIDA - NOME BEBIDA / VALOR / TROCO
+//PEDIDO - CLIENTE / LANCHE / QUANTIDADE / BEBIDA / QUANTIDADE / PAGAMENTO / TROCO
+
+//CLASS Bebidas
+
+public class Bebido {
+    Public String nomebebido ;
+    Public Integer valorbebido ;
+
+}
+
+//CLASS Lanches
+
+public class Comido {
+    Public String nomecomido ;
+    Public Integer valorcomido ;
+}
+
+//CLASS Pedido
+
+public class Pedido {
+    Public String cliente;
+    Public Integer quantidadebebido;
+    Public Integer quantidadecomido;
+    Private Integer valorcomido = 3;
+    Private Integer valorbebido = 3;
+    
+    Public Integer venderbebido (Integer pagamento){
+        Integer Troco = pagamento - (quantidadebebido * valorbebido);
+        Return Troco;
+    }
+    Public Integer vendercomido (Integer pagamento){
+        Integer Troco = pagamento - (quantidadecomido * valorcomido);
+        Return Troco;
+    }
+}
+
+
+//APEX ENTER OBJETO 
+
+Pedido P1 = New Pedido();
+P1.cliente = 'Rutherford Bohr';
+P1.quantidadebebido = 3;
+P1.quantidadecomido = 9;
+
+P1.vender(40);
+System.debug(P1);
+
+
+//1.1 TESTE STATIC RELACIONANDO CLASSES
+
+//CLASS Valores
+
+public class Valores {
+    Public static integer totalcomido(integer quantidadecomido){
+        Integer totalcomido = (quantidadecomido * 3);
+        return totalcomido;
+    }
+    public static integer totalbebido(integer quantidadebebido){
+        Integer totalbebido = (quantidadebebido * 3);
+        return totalbebido;
+}
+}
+
+//CLASS Pedido 2
+
+public class Pedido2 {
+    Public String cliente;
+    Public Integer C, B;
+    Public Void vender (Integer pagamento){
+        Integer Troco = pagamento - (Valores.totalcomido( C ) + Valores.totalbebido( B ));
+        System.debug('Total = ' + (Valores.totalcomido( C ) + Valores.totalbebido( B )));
+        System.debug(cliente + 'Recebaaaaaaaaaa! Seu troco: R$'+Troco);
+    }
+}
+
+//1.1 ENTER APEX OBJECT
+
+Pedido2 P1 = New Pedido2();
+P1.cliente = 'jeremias santo cristo';
+P1.C = 6;
+P1.B = 3;
+P1.vender(40)
+System.debug(P1);
+
+
+//1.2 TESTE STATIC VARIAVEL FOFRMULA
+
+//CLASS Valores
+
+public class Valores {
+    Public static integer totalcomido(integer quantidadecomido){
+        Integer totalcomido = (quantidadecomido * 3);
+        return totalcomido;
+    }
+    public static integer totalbebido(integer quantidadebebido){
+        Integer totalbebido = (quantidadebebido * 3);
+        return totalbebido;
+	}
+}
+
+//CLASS Pedido2
+
+public class Pedido2 {
+    Public String cliente;
+    Public Integer C, B;
+    Private Integer TComido = Valores.totalcomido( C );
+    Private Integer TBebido = Valores.totalbebido( B );
+    Public Integer getC(){
+        Return C;
+    }
+    Public Integer getB(){
+        Return B;
+    }
+    Public Void vender (Integer pagamento){
+        Integer Troco = pagamento - (TComido + TBebido);
+        System.debug('Total = ' + (TComido + TBebido));
+        System.debug(cliente + 'Recebaaaaaaaaaa! Seu troco: R$'+Troco);
+    }
+}
+
+//ENTER APEX OBJETO
+
+Pedido2 P1 = New Pedido2();
+P1.cliente = 'jeremias santo cristo';
+P1.C = 6;
+P1.B = 3;
+P1.vender(40);
+System.debug(P1);
+
+-------------------------------------------------------------------
+//EXEMPLO 2 FAZENDA MALUCA
+//CLASSIFICAR ANIMAIS DA FAZENDA
+//NOME / ESPECIE / IDADE / FUNÇÃO / RESULTADO
+
+//CLASS FazendaBixos
+public class FazendaBixos {
+    Public String nome;
+    Public String especie;
+    Public Integer idade;
+    Public integer resultado;
+    Public void destino(){
+        If( especie == 'galinha'){
+            System.debug('colocar ovos');
+        }Else If( especie == 'vaca'){
+            System.debug('produzir leite');
+        }Else If( especie == 'porco'){
+            System.debug('Engordar e morrer na brasa');
+        }Else If( especie == 'cavalo'){
+            System.debug('mobilidade rural');
+        }Else If( especie == 'cachorro'){
+            System.debug('proteger o terreno');
+        }Else If( especie == 'gato'){
+            System.debug('conduzir o mundo à próxima extinção!');
+        }Else {
+            System.debug('Mata antes que dê cria!');
+        }
+	}
+    Public void sacrificar(){
+        If(resultado >= 5){
+            System.debug('Bota pra trabalhar');
+        }Else If(resultado < 6 && resultado > 2){
+            System.debug('Prepara a sopa');
+        }Else {
+            System.debug('Sacrificar');
+        }
+    }
+
+//ENTER APEX OBJETO
+
+FazendaBixos G1 = New FazendaBixos();
+G1.nome = 'Penosa';
+G1.especie = 'galinha';
+G1.idade = 2;
+G1.resultado = 9;
+G1.destino();
+G1.sacrificar();
+System.debug(G1);
+
+FazendaBixos G2 = New FazendaBixos();
+G2.nome = 'Peninha';
+G2.especie = 'galinha';
+G2.idade = 3;
+G2.resultado = 4;
+G2.destino();
+G2.sacrificar();
+System.debug(G2);
+
+FazendaBixos G3 = New FazendaBixos();
+G3.nome = 'Pintadinha';
+G3.especie = 'galinha';
+G3.idade = 1;
+G3.resultado = 1;
+G3.destino();
+G3.sacrificar();
+System.debug(G3);
+
+FazendaBixos C1 = New FazendaBixos();
+C1.nome = 'Dogão';
+C1.especie = 'cachorro';
+C1.idade = 4;
+C1.resultado = 8;
+C1.destino();
+C1.sacrificar();
+System.debug(C1);
+
+FazendaBixos C2 = New FazendaBixos();
+C2.nome = 'cachorrinho fiada';
+C2.especie = 'cachorro';
+C2.idade = 9;
+C2.resultado = 6;
+C2.destino();
+C2.sacrificar();
+System.debug(C2);
+
+FazendaBixos CV1 = New FazendaBixos();
+CV1.nome = 'cachorrinho fiada';
+CV1.especie = 'cavalo';
+CV1.idade = 8;
+CV1.resultado = 10;
+CV1.destino();
+CV1.sacrificar();
+System.debug(CV1);
+
+FazendaBixos V1 = New FazendaBixos();
+V1.nome = 'Mimosa';
+V1.especie = 'vaca';
+V1.idade = 8;
+V1.resultado = 4;
+V1.destino();
+V1.sacrificar();
+System.debug(V1);
+
+FazendaBixos GT1 = New FazendaBixos();
+GT1.nome = 'Gatonildo';
+GT1.especie = 'gato';
+GT1.idade = 3;
+GT1.resultado = 10;
+GT1.destino();
+GT1.sacrificar();
+System.debug(GT1);
+
+FazendaBixos GT2 = New FazendaBixos();
+GT2.nome = 'Gatozilla';
+GT2.especie = 'gatossauro';
+GT2.idade = 3;
+GT2.resultado = 10;
+GT2.destino();
+GT2.sacrificar();
+System.debug(GT2);
+
+------------------------------------------------------------------
+//EXEMPLO 3 NOME DA CLASSE
+
+//CLASS NomeDaClasse
+
+public class NomeDaClasse {
+	// AQUI VÃO AS DECLARAÇÕES DOS ATRIBUTOS E MÉTODOS
+	// ONDE SE INSEREM AS VARIÁVEIS QUE DESCREVEM O OBJETO
+	// ATRAVÉS DA ABSTRAÇÃO, VISANDO PROJETAR CARACTERÍSTICAS REAIS DO OBJETO
+    Public String Nome, Conteudo;
+    //UM ATIBUTO É COMPOSTO PELO TIPO (STRING) E PELA DECLARAÇÃO (Nome e Conteudo)
+    //UM MÉTODO É COMPOSTO PELO TIPO (VOID), PELA DECLARAÇÃO (Descrever) E PELO COMANDO (System debug)
+    Public Void Descrever (){
+        System.debug('O nome da classe é ' + Nome + ' e seu conteúdo é ' + Conteudo);
+	}
+    Public Decimal Nota;
+    Public Void Feedback(){
+        If (nota >= 6){
+            System.debug('A classe ' + Nome + 'é nota: ' + Nota + ' .\nE seu conteúdo é ' + Conteudo);
+        }Else {
+            System.debug('A classe ' + Nome + 'é nota: ' + Nota + '.\nPor isso não presta pra nada, seu conteúdo é ' + Conteudo );
+		}
+	}
+}       
+
+//APEX ENTER OBJETO
+
+NomeDaClasse Classandra = New NomeDaClasse();
+Classandra.Nome = 'Classandra Von Classenberg';
+Classandra.Conteudo = 'A longa linhagem da família Classenberg esquecida pelas areias do tempo\n Perdida por entre a ilusão de um futuro Classandra partiu';
+Classandra.Nota = 4.5;
+Classandra.Descrever();
+Classandra.Feedback();
+System.debug(Classandra.Nome);
+System.debug(Classandra.Conteudo);
+System.debug(Classandra);
+
+NomeDaClasse Classy = New NomeDaClasse();
+Classy.Nome = 'Classy Lessy ZeroStressi';
+Classy.Conteudo = 'Ela vivia de boa, numa nice, só paz e amor.\nMas vivia umas aventuras dahora com sua trupe de malucos!';
+Classy.Nota = 9.5;
+Classy.Descrever();
+Classy.Feedback();
+System.debug(Classy.Nome);
+System.debug(Classy.Conteudo);
+System.debug(Classy);
+
+----------------------------------------------------
