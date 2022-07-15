@@ -1,0 +1,195 @@
+1-SARAH ROCHA
+
+trigger OpportunityTrigger on Opportunity (before insert, before update) {
+    for(Opportunity opportunity: trigger.new){
+        if(opportunity.stageName=='Prospecting'){
+            opportunity.nextStep='Qualificar';}
+      
+        if( opportunity.stageName=='Qualification'){
+         opportunity.nextStep= 'Preparar para Análise';}
+    
+        if(opportunity.stageName== 'Needs Analysis'){
+        opportunity.nextStep= 'Analisar proposta de valor';} 
+        
+        if(opportunity.stageName=='Value Proposition'){
+         opportunity.nextStep='Decisão individual';}
+        
+        if(opportunity.stageName=='Id. Decision Makers'){
+         opportunity.nextStep= 'Percepção e Análise';}
+        
+        if(opportunity.stageName=='Perception Analysis'){
+         opportunity.nextStep='Proposta de cotação';}
+        
+        if(opportunity.stageName=='Proposal/Price Quote'){
+         opportunity.nextStep='Negociação e Revisão';}
+        
+        if (opportunity.stageName=='Negotiation/Review'){
+         opportunity.nextStep= 'Fechamento';}
+        
+        if(opportunity.stageName=='Closed Won'){
+         opportunity.nextStep= 'Embolsar o money';}
+        
+        if(opportunity.stageName=='Closed Lost'){
+         opportunity.nextStep =  'Chora as Pitangas';}
+        
+        if(opportunity.amount==null){
+         opportunity.addError('O campo valor não pode estar vazio');}
+       
+    }   
+    
+}
+
+//APEX OBJECT
+
+Opportunity O = New Opportunity(
+ Name = 'Oportunidade 1',
+ CloseDate = Date.newInstance(2022,11,07),
+ Amount = 90000,
+ type = 'Existing Customer - Replacement',
+ Stagename = 'Qualification'
+);
+
+Insert O;
+
+System.debug(O.Nextstep);
+
+//TESTE EM SOQL
+
+SELECT Id, Name, Nextstep FROM Opportunity 
+
+—---------------------------------------------------------------------------------
+
+2 - RODRIGO
+
+trigger TriggerContact on Contact (before insert, before update) {
+    // aqui iremos inserir o tempo do nosso código
+    
+    if(trigger.IsBefore && trigger.IsUpdate)
+        // aqui usaremos a condição se para dar as opções de tempo
+    {
+        for(Contact Contato : trigger.new)
+            //Aqui usaremos o for
+        {
+            Contact Contato1 = Trigger.OldMap.Get(Contato.Id);
+            // Código para ver se o ultimo contato foi alterado
+            if(Contato.Firstname != Contato1.Firstname || Contato.Lastname!= Contato1.Lastname)
+                // Aqui iremos ver se o nome ou o sobrenome são diferentes do ultimo registro
+            {
+                 Contato.addError('O nome e sobrenome não podem ser alterados');
+                // Essa sera nossa frase de erro
+            }
+        }
+    }
+}
+
+//APEX OBJECT
+
+Contact B1 = New Contact(
+	FirstName = 'Contato',
+    LastName = 'Brabo'   
+);
+Insert B1;
+
+System.debug(B1.Firstname + ' ' + B1.Lastname);
+
+B1.Firstname = 'catota';
+B1.Lastname = 'Boba';
+
+System.debug(B1.Firstname + ' ' + B1.Lastname);
+
+Update B1   
+
+//TESTE EM SOQL
+
+SELECT Id, Firstname, Lastname FROM Contact
+
+
+—-------------------------------------------------------------------------------------------------
+3 - YGOR
+
+trigger accountTrigger on Account (after insert) {
+ // aqui iremos inserir o tempo do nosso código
+      list <task> task = new list <task>();
+      for(account account : trigger.new){
+          if(account.Industry =='Food & beverage' && account.type =='Prospect'){
+              task task1 = new task (
+              description = 'Trabalhar Lead para qualificação dos campos de contato',
+              subject = 'call',
+               whatId = account.id);
+              task.add(task1);
+          }
+      }
+    insert task;
+  }        
+
+4 - YGOR
+trigger Accountcreate on Lead(after insert){
+ List<Account> accs= new List<Account>();
+   for(Lead ld:Trigger.new){
+         Account acc= new Account();
+         acc.Name=ld.Lastname;
+		 accs.add(acc) ; 
+   }
+   if(accs.size()>0){
+	   
+	   insert accs;
+       system.debug(accs);
+   }
+
+}
+
+
+—------------------------------------------------------------------------------------
+5 - GUILHERME
+trigger LeadTrigger on Lead (after insert, before insert ){
+
+   if(trigger.isAfter && trigger.isinsert){
+    list<task> listNewTasks = new List<task>();
+    for(lead l: trigger.new){
+         if(string.isblank(l.Industry) || string.isblank(l.Website))
+          {task newtask = new task
+              (
+           status = 'not started', 
+           Subject = 'entrar em contato pra verificar as informações', 
+           Priority = 'Normal',
+           whoId = l.Id 
+               ); 
+             listNewTasks.add(newtask);
+            }
+         }
+       insert listNewTasks;
+    }
+    if(trigger.isbefore && trigger.isinsert){
+        for(lead l: trigger.new){
+            if(l.FirstName == null || l.LastName == null || l.Email == null ||(l.MobilePhone == null && l.Phone == null))
+            {l.addError('os campos primeiro nome, sobrenome, email, telefone ou celular são obrigatórios');}
+        }
+    }
+}
+
+
+//APEX OBJECT
+
+Lead L3 = New Lead (
+	FirstName = 'Mac',
+    LastName = 'Lavin',
+    Company = 'Projeto Y',
+    Phone = '555887799',
+    Email = 'mac@lovin.com',
+    Status = 'Open - Not Contacted' 
+);
+Insert L3;
+
+System.debug(L3.Firstname + ' ' + L3.Lastname);
+
+
+Lead L4 = New Lead (
+	FirstName = 'Mac',
+    LastName = 'Lavin',
+    Company = 'Projeto Y',
+    Email = 'mac@lovin.com',
+    Status = 'Open - Not Contacted' 
+);
+Insert L4;
+
+System.debug(L4.Firstname + ' ' + L4.Lastname);
