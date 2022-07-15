@@ -1,5 +1,10 @@
 1-SARAH ROCHA
 
+//1. O próximo passo nunca é preenchido, então, às vezes a equipe se atrapalha no momento de desenvolver a oportunidade para fechar o negócio
+// Precisamos que o próximo passo seja preenchido conforme a Fase em que a oportunidade se encontra. Conforme tabela ao lado.
+
+// TRIGGER
+
 trigger OpportunityTrigger on Opportunity (before insert, before update) {
     for(Opportunity opportunity: trigger.new){
         if(opportunity.stageName=='Prospecting'){
@@ -61,6 +66,12 @@ SELECT Id, Name, Nextstep FROM Opportunity
 
 2 - RODRIGO
 
+//2. Os registros de contatos estavam sendo constantemente alterados por estagiários alterados da LNP inc.
+// Porém são estagiários queridos que um dia também serão executivos de sucesso, precisamos treiná-los e portanto eles precisam poder errar antes de irem para o RH.
+// O que podemos fazer para salvar essas pobres almas desavizadas? 
+
+//TRIGGER
+
 trigger TriggerContact on Contact (before insert, before update) {
     // aqui iremos inserir o tempo do nosso código
     
@@ -107,6 +118,11 @@ SELECT Id, Firstname, Lastname FROM Contact
 —-------------------------------------------------------------------------------------------------
 3 - YGOR
 
+//3. Demora na qualificação e conversão dos Leads em Oportunidades.
+// Estratégias de vendas voltada para o nicho principal do público alvo.
+// Preciso lembrar meus vendedores de dispensarem uma atenção especial a jornada dos consumidores do ramo de comidas e bebidas, eles são o público alvo da LNP S.A.
+
+
 trigger accountTrigger on Account (after insert) {
  // aqui iremos inserir o tempo do nosso código
       list <task> task = new list <task>();
@@ -123,6 +139,12 @@ trigger accountTrigger on Account (after insert) {
   }        
 
 4 - YGOR
+
+//4. As contas já abrem o cadastro inicial dos Clientes a partir das informações contidas no lead, porém o processo é feito manualmente pelos funcionários.
+// Portanto Precisamos automatizar a criação de contas a partir de informações do Lead quando estas forem preenchidas.
+
+//TRIGGER
+
 trigger Accountcreate on Lead(after insert){
  List<Account> accs= new List<Account>();
    for(Lead ld:Trigger.new){
@@ -141,6 +163,12 @@ trigger Accountcreate on Lead(after insert){
 
 —------------------------------------------------------------------------------------
 5 - GUILHERME
+
+//5. Alguns Leads, vindos de outras fontes, acabam não contendo todos os campos preenchidos.
+// O problema é na ocasião de sua edição eles permanecerem em branco, temos que trazer uma tarefa para que seja feito o contato e a devida qualificação do Lead. 
+// Portanto quando um lead for editado e este for salvo com os campos de Setor e Site da Web em branco criar tarefa relacionada para entrar em contato e verificar (qualificar) as informações do lead
+// E também serão obrigatórios os campos de Nome e contato do Lead
+
 trigger LeadTrigger on Lead (after insert, before insert ){
 
    if(trigger.isAfter && trigger.isinsert){
