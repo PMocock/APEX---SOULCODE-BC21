@@ -1,0 +1,201 @@
+//14-07-2022 - TRIGGER 3 
+//FELIPÃO
+
+/*A Boruto Company deseja realizar algumas automações nos processos de sua empresa. Antes de salvar um novo Lead, deve possuir pelo menos um dos números de contato (telefone ou celular) preenchido. Se o lead na hora de sua criação não possui uma classificação indicada por padrão deve ser atribuído Cold para o mesmo. A receita anual não pode ser nula, caso esteja vazia atribua o valor 0. Caso seja passado um valor negativo, emitir uma mensagem de erro. Quando um Lead é salvo, depois de criado se seu status é aberto e não contactado, deve ser criada uma tarefa associada ao lead, com o assunto ‘Entrar em contato nos próximos dias’. Um Lead não pode ser alterado do status aberto e não contactado para fechado e convertido ou fechado e não convertido, pois o Lead provavelmente não possui nenhuma interação com os vendedores.*/
+
+//BEFORE INSERT
+//Deve possuir pelo menos um dos números de contato (telefone ou celular) preenchido.
+//Se o lead na hora de sua criação não possui uma classificação indicada por padrão deve ser atribuído Cold para o mesmo.   
+//A receita anual não pode ser nula, caso esteja vazia atribua o valor 0.   
+//Caso seja passado um valor negativo, emitir uma mensagem de erro.
+
+//AFTER INSERT
+//se seu status é aberto e não contactado, deve ser criada uma 
+//tarefa associada ao lead, com o assunto ‘Entrar em contato nos próximos dias’.
+
+//BEFORE UPDATE
+//Um Lead não pode ser alterado do status aberto e não contactado para 
+//fechado e convertido ou fechado e não convertido, pois o Lead provavelmente
+//não possui nenhuma interação com os vendedores.
+
+//TRIGGER
+
+trigger LeadTrigger on Lead (before insert,After Insert, Before Update, After Update) {
+        If (Trigger.IsBefore && Trigger.IsInsert){
+            For (Lead L: Trigger.new){
+        		If (L.Phone == Null && L.MobilePhone == Null){
+            		L.Phone.AddError('Insira ao menos um telefone de contato para o Lead.');
+                	System.debug('Why no Phone?');
+        		}
+        		If (String.Isblank(L.Rating)){
+					System.debug('Why no Rating?');
+            		L.Rating = 'Cold';
+        		}                
+        		If (L.AnnualRevenue <= 0 || L.AnnualRevenue == Null){
+            		System.Debug('Why no Money?');
+            		L.AnnualRevenue = 0;
+        		}
+            }
+        }
+        Else If (Trigger.IsAfter && Trigger.IsInsert){
+            List <Task> C = New List <Task> ();
+            For (Lead L: Trigger.new){
+            	If (L.Status == 'Open - Not Contacted'){
+                	Task Task = New Task(
+                    	Description = 'Entrar em contato com ' + L.FirstName + ' ' + L.LastName,
+                        Subject = 'Call',
+                        Priority = 'High',
+                        WhoId = L.Id,
+                        ActivityDate = (Date.Today())
+                    ); 
+                	C.Add (Task);
+				}
+            }
+            Insert C;
+        }
+    If (Trigger.IsBefore && Trigger.Isupdate){
+        For (Lead L: Trigger.new){
+            Lead LI = Trigger.OldMap.Get(L.Id);
+            If((L.Status == 'Closed - Converted' || L.Status == 'Closed - Not Converted') && LI.Status == 'Open - Not Contacted'){
+                L.Status.AddError('Não pode converter Leads sem contato prévio');
+            }
+        }
+    }    	
+}
+
+// APEX OBJECT
+
+Lead L3 = New Lead (
+	FirstName = 'Mac',
+    LastName = 'Lavin',
+    Company = 'Projeto Y',
+    Phone = '555887799',
+    Status = 'Open - Not Contacted'
+);
+Insert L3;
+
+L3.Status = 'Closed - Not Converted';
+
+Update L3;
+
+--------------------------------------------------------------
+
+
+
+
+-------------------------------------------------------------
+//Após o salvamento da conta verificar se a conta possui a classificação hot e receita anual >= 500000
+//se sim, criar uma tarefa associada a conta, com o assunto, 'Criar um oportunidade diferenciada para essa empresa'
+
+//TRIGGER
+
+trigger AccountTrigger on Account (After Insert) {
+    For (Account A: Trigger.new){
+    If (A.AnnualRevenue >= 500000 && A.Rating == 'Hot'){
+    	List <Opportunity> O = New List <Opportunity> ();
+        
+                Opportunity Oppo = New Opportunity(
+                    	Name = 'Oportunidade do ' + A.Name,
+						CloseDate = Date.Today(),
+ 						Stagename = 'Prospecting',
+                    	Description = 'Criar uma oportunidade diferenciada para a empresa ' + A.Name,
+                    	AccountId = A.Id                      
+                    ); 
+                	O.Add (Oppo);
+        Insert O;
+    }       
+}
+}
+
+//APEX OBJECT
+
+Account Acc = New Account (
+	Name = 'Teste do loop MALUCO!',
+    Rating = 'Hot',
+    Phone = '88998877',
+    AnnualRevenue = 4500000
+);
+
+Insert Acc;
+
+---------------------------------------------------------------------------
+//CODIGUIN FELIPE
+
+trigger AccountTrigger on Account (before insert, before update, after insert) {
+    //Após o salvamento da conta verificar se a conta possui a classificação hot e receita anual >= 500000
+    //se sim, criar uma tarefa associada a conta(WhatId), com o assunto, 'Criar um oportunidade diferenciada para essa empresa'
+    
+    
+    //ações para after insert
+    if(Trigger.isAfter && Trigger.isInsert){
+        //criar a lista de novas tarefas
+        List<Task> lTasks = new List<Task>();
+        
+        for(Account account : Trigger.new){
+            //realizar a verificação da condição
+            if(account.rating == 'Hot' && account.AnnualRevenue >= 500000){
+                //implementar a estrutura da tarefa e 
+                Task task = new Task(
+                	Subject = 'Criar um oportunidade diferenciada para essa empresa',
+                    //WhoId -> alguem (lead, contato)
+                    //WhatId -> algo ( Conta, Oportunidade, Tarefa)
+                    WhatId = account.Id
+                );
+                
+                //adicionar a lista
+                lTasks.add(task);
+            }
+        }
+        
+        insert lTasks;
+        //inserir a lista de tarefas
+    }
+}
+
+---------------------------------------------------------------------
+//JOAQUIM
+
+if(Trigger.isUpdate) {
+            for(Lead Ld : Trigger.new ){
+                Lead oldStutsLead = Trigger.oldMap.get(Ld.Id);
+                
+                if((Ld.Status == 'Closed - Converted' && oldStutsLead.Status == 'Open - Not Contacted') || 
+                   (Ld.Status == 'Closed - Not Converted' &&  oldStutsLead.Status == 'Open - Not Contacted')){
+                    Ld.addError('Não pode converter Leads sem contato prévio');
+                }
+            }            
+        }
+
+
+---------------------------------------------------------------------------
+
+//antes de atualizar uma conta verifique:
+    //se o valor anterior de classificação for cold e o novo valor de classificação for hot, emitir uma mensagem de erro
+    //não é possivel alterar de cold para hot
+
+
+//TRIGGER
+
+trigger AccountTrigger on Account (After Insert, Before Update) {
+    If (Trigger.IsUpdate && Trigger.IsBefore){
+        For (Account A: Trigger.new){
+            Account AA = Trigger.OldMap.Get(A.Id);
+        	If (A.AnnualRevenue >= 500000 && A.Rating == 'Hot'){
+            	List <Opportunity> O = New List <Opportunity> ();
+            
+                    Opportunity Oppo = New Opportunity(
+                            Name = 'Oportunidade do ' + A.Name,
+                            CloseDate = Date.Today(),
+                            Stagename = 'Prospecting',
+                            Description = 'Criar uma oportunidade diferenciada para a empresa ' + A.Name,
+                            AccountId = A.Id                      
+                        ); 
+                        O.Add (Oppo);
+            Insert O;
+        }  
+        If (A.Rating == 'Hot' && AA.Rating == 'Cold'){
+                A.Rating.AddError('Não pode alterar de Classificação de Cold para Hot.');
+            	System.debug('Será que vai aparecer no log mesmo com mensagem de erro no sistema?');
+            }
+		}   
+}

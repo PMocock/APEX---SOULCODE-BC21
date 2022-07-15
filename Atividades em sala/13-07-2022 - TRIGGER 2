@@ -1,0 +1,43 @@
+//13/07/2022 - TRIGGER 2
+
+trigger AccountTrigger on Account (Before Insert, Before Update, After Insert) {
+//Inserir prospect como padrão se o campo Type estiver em branco
+//If Base ISBEFORE  
+    If (Trigger.IsBefore){
+        For (Account account: Trigger.New){
+//1.1 Before 1º IF Type
+            If (String.IsBlank(Account.type) && Trigger.IsInsert){
+                account.Type = 'Prospect';
+                System.debug('1.1 Before 1º If Type');
+            }
+//For acessa nova trigger, passa para o if e valida se o campo type está preenchido.
+//ISBEFORE = ANTES e ISINSERT = Ação durante a inserção de dados
+//Todo esse processo antes do usuário salvar o registro
+//Se o campo type estiver em branco, será preenchido como 'Prospect'.
+// 
+//1.2 Before 2º IF AnnualRevenue
+        If (account.AnnualRevenue == Null && Trigger.IsInsert){
+            account.AnnualRevenue = 0;
+            System.debug('1.2 Before 2º IF AnnualRevenue');
+//Se RECEITA ANUAL estiver nula, será preenchida como '0'.
+//1.3 Before 3º IF TELEFONE
+        }If (String.IsBlank(account.Phone) && Trigger.IsInsert){
+            account.Phone.AddError('O campo de telefone deve ser preenchido');
+            System.debug('1.3 Before 3º IF Phone');
+//Mensagem de erro caso o usuário tente inserir registro com campo TELEFONE em branco
+//1.4 Before 4º IF RECEITA ANUAL auto preenchimento            
+        }If (account.AnnualRevenue > 0 && Trigger.IsUpdate){
+            account.AddError('O campo receita anual está inválido, insira valores positivos!');
+            System.debug('1.4 Before 4º If Annual Revenue auto preenchimento');
+//Mensagem de erro caso o usuário tente inserir registro com campo RECEITA ANUAL em branco
+        }
+       
+    }
+    //Fim do For
+}
+//Fim do IF Base
+}
+//Fim do Trigger
+
+----------------------------------------------------------------------------
+
