@@ -1,0 +1,284 @@
+//18-07-2022 CLASSE TESTE
+
+//CÓDIGO NANA
+
+public class TemperatureConverter {
+//Pega a temperatura em Fahrenheit e vai retornar ela em Celsius
+
+    public static Decimal FahrenheitToCelsius(Decimal fh){
+        decimal cs =(fh - 32) * 5/9;
+        return cs.setscale(2);
+    }        
+}
+@isTest
+//
+private class TemperatureConverterTest {
+    @isTest static void testWarmTemp(){
+        decimal celsius = TemperatureConverter.FahrenheitToCelsius(70);
+        System.AssertEquals(0,celsius);
+    }
+    @isTest static void testFreezingPoint(){
+        decimal celsius = TemperatureConverter.FahrenheitToCelsius(32);
+        System.AssertEquals(0,celsius);
+    }
+ @isTest static void testBoilingPoint(){
+        decimal celsius = TemperatureConverter.FahrenheitToCelsius(212);
+        System.AssertEquals(0, celsius,'Temperatura não está no ponto.' );
+    }
+    @isTest static void testNegativeTemp(){
+        decimal celsius = TemperatureConverter.FahrenheitToCelsius(-10);
+        System.AssertEquals(-23.33,celsius);
+    }
+}
+
+----------------------------------------------------------------------
+//MEU CODIGUIN
+
+//CLASSE TemperatureConverter
+
+public class TemperatureConverter {
+    
+    Public Static Decimal ConverterC (decimal T){
+            Decimal ConvF = (T * 1.8) + 32.0;
+    		System.debug('Temperatura em Celsius = ' + T + 'Cº');
+    		System.debug('Temperatura em Fahrenheint = ' + ConvF + 'Fº');
+            Return ConvF;
+    	}
+    Public Static Decimal ConverterF (Decimal T){
+            Decimal ConvC = (T - 32.0) / 1.8;
+            System.debug('Temperatura em Fahrenheint = ' + T + 'Fº');
+    		System.debug('Temperatura em Celsius = ' + ConvC + 'Cº');
+            Return ConvC;
+        }
+	}
+
+------------------------------------------------------------------
+// CLASSE TESTE TemperatureConverterTest
+//@IsTest é usado antes da Classe e antes dos métodos da classe
+
+@IsTest
+public class TemperatureConverterTest {
+    
+    @IsTest Static Void TestFreezingPoint (){
+        Decimal T = TemperatureConverter.ConverterF(32);
+        System.AssertEquals(0, T, 'Temperatura não está no ponto');
+    	}
+    
+    @IsTest Static Void TestBollingPoint (){
+        Decimal T = TemperatureConverter.ConverterF(212);
+        System.AssertEquals(100, T, 'Temperatura não está no ponto');
+    	}
+    
+    @IsTest Static Void TestNegativeTemperature (){
+        Decimal T = TemperatureConverter.ConverterF(-10);
+        System.AssertEquals(-23.33, T, 'Temperatura não está no ponto');
+    	}
+    
+}
+
+
+----------------------------------------------------------------
+//CLASSE FranquiasDoChurras
+
+public class FranquiasDoChurras {
+    Static Integer QuantidadeDeFranquias = 0;
+    Static Integer AcumuladoTotal = 0;
+    Integer CaixaFranquia = 0;
+    String Cidade;
+    
+    Public Void CriarFranquia (String NovaCidade, Integer VInicial){
+        Cidade = NovaCidade;
+        CaixaFranquia = VInicial;
+        AcumuladoTotal = AcumuladoTotal + CaixaFranquia;
+        QuantidadeDeFranquias++;        
+    }
+    Public Integer GetQuantidadeDeFranquias (){
+        Return QuantidadeDeFranquias;
+    }
+    Public String GetFranquia(){
+        Return Cidade;
+    }
+    Public Integer GetCaixaFranquia (){
+        Return CaixaFranquia;
+    }
+    Public Integer GetAcumuladoTotal(){
+        Return AcumuladoTotal;
+    }
+    Public Void InfoFranquia(){
+        System.debug('\nEssa franquia está na cidade de ' + Cidade + '\n capital: R$ ' + CaixaFranquia 
+                     + '\n DoChurras possui ' + QuantidadeDeFranquias + ' Franquias espalhadas pelo País' 
+                     + '\n A DoChurras possui Patrimônio Acumulado de R$ ' + AcumuladoTotal);
+    }
+
+}
+
+//CLASSE TESTE 
+
+@IsTest
+public class FranquiaDoChurrasTeste {
+    @IsTest
+    Public Static Void TestFranquia (){
+        FranquiasDoChurras test = New FranquiasDoChurras();
+        FranquiasDoChurras test1 = New FranquiasDoChurras();
+        FranquiasDoChurras test2 = New FranquiasDoChurras();
+        FranquiasDoChurras test3 = New FranquiasDoChurras();
+    	
+        Integer QtTeste = test.GetQuantidadeDeFranquias();
+        Integer AcumuladoTeste = test.GetAcumuladoTotal();
+        
+        System.assertEquals(0, QtTeste, 'Os valores não batem!');
+        System.assertEquals(0, AcumuladoTeste, 'Os valores não batem!');
+        
+        Test.CriarFranquia('Recife', 10000);
+        Test2.CriarFranquia('Salvador', 20000);
+        Test1.CriarFranquia('Osasco', 30000);
+        Test3.CriarFranquia('Natal', 50000);
+        
+        QtTeste = test.GetQuantidadeDeFranquias();
+        AcumuladoTeste = test.GetAcumuladoTotal();
+        
+        string CidadeTest = test2.getFranquia();
+        system.AssertEquals('Salvador', CidadeTest, 'Os valores não batem.');
+        
+        //comparativo ou impressão de valores que aplicamos
+        //retorna os valores quando criamos uma franquia
+        system.assertEquals(4, QtTeste, 'Os valores não batem.');
+  
+    }
+}
+
+-----------------------------------------------------------
+//ATIVIDADE EM SALA TRIGGER TESTE
+
+//TRIGGER AccountTrigger
+
+trigger AccountTrigger on Account (before insert, before update, after insert) {
+//Inserir Prospect como padrão se o campo Type estiver em branco.
+//before
+    if(Trigger.isBefore){
+        for(Account account: trigger.new){
+            if(String.isblank(account.Type) && Trigger.isInsert){
+                account.Type='Prospect';
+                //For acessa a nova trigger, passa para o if e valida se o campo TIPO está preenchido.
+         
+ //IsBefore = ANTES e isInsert =Ação Durante a inserção
+//Todo esse processo antes do usuário salvar registro.
+                //O campo Tipo será preenchido como Prospect
+            } If(account.AnnualRevenue == null && Trigger.isInsert){
+                account.AnnualRevenue = 0;
+                //Receita anual se for nulo eu quero que ele preencha com 0 como padrão
+  }if(String.isblank(account.Phone) && Trigger.IsInsert){
+                account.Phone.addError('O campo do telefone deve ser preenchido');
+            }if(account.AnnualRevenue < 
+0 && Trigger.IsUpdate){
+                account.addError('O campo receita Anual está invalido!');
+            }
+        }  
+    }
+}
+
+//CLASSE TESTE
+
+@IsTest
+public class AccountTriggerTest {
+    @IsTest
+    Public Static Void TestNewAccount (){
+    	Account test = New Account();
+        //TESTE SEM ERRO
+    	test.Name= 'Conta Teste Trigger Maluco'; 
+    	test.Rating = 'Hot';
+    	test.Type = 'Prospect';
+    	test.AnnualRevenue = 1000;
+    	test.Phone = '8899554466';    
+    }
+    @IsTest
+    Public Static Void TestTypeAccount(){
+        Account test1 = New Account();
+        //TESTE SEM O TYPE (TRIGGER TEM QUE MUDAR PARA PROSPECT)
+    	test1.Name= 'Conta Teste Trigger Maluco1'; 
+    	test1.Rating = 'Hot';
+    	test1.AnnualRevenue = 1000;
+    	test1.Phone = '8899554466';
+    }
+    @IsTest
+    Public Static Void TestAnualRevenueAccount(){
+        Account test2 = New Account();
+        //TESTE SEM O ANNUALREVENUE
+    	test2.Name= 'Conta Teste Trigger Maluco2'; 
+    	test2.Rating = 'Hot';
+    	test2.Phone = '8899554466';
+    }
+    @IsTest
+    Public Static Void TestPhoneAccount(){
+        Account test3= New Account();
+        //TESTE SEM O PHONE 
+    	test3.Name= 'Conta Teste Trigger Maluco3'; 
+    	test3.Rating = 'Hot';
+        test3.AnnualRevenue = 1000;
+    }
+     @IsTest
+    Public Static Void TestAnnualRevenueNegativaAccount (){
+    	Account test4 = New Account();
+        //TESTE SEM ERRO
+    	test4.Name= 'Conta Teste Trigger Maluco'; 
+    	test4.Rating = 'Hot';
+    	test4.Type = 'Prospect';
+    	test4.AnnualRevenue = -1000;
+    	test4.Phone = '8899554466';    
+    }
+    System.assertEquals('Prospect', test1.Type, 'Os valores não batem!');
+}
+
+
+
+
+// SEGUNDA TENTATIVA
+
+@IsTest
+public class AccountTriggerTest {
+    @IsTest
+    Public Static Void TestNewAccount (){
+    	Account test = New Account();
+        //TESTE SEM ERRO
+    	test.Name= 'Conta Teste Trigger Maluco'; 
+    	test.Rating = 'Hot';
+    	test.Type = 'Prospect';
+    	test.AnnualRevenue = 1000;
+    	test.Phone = '8899554466';    
+    }
+    @IsTest
+    Public Static Void TestTypeAccount(){
+        Account test1 = New Account();
+        //TESTE SEM O TYPE (TRIGGER TEM QUE MUDAR PARA PROSPECT)
+    	test1.Name= 'Conta Teste Trigger Maluco1'; 
+    	test1.Rating = 'Hot';
+    	test1.AnnualRevenue = 1000;
+    	test1.Phone = '8899554466';
+    }
+    @IsTest
+    Public Static Void TestAnualRevenueAccount(){
+        Account test2 = New Account();
+        //TESTE SEM O ANNUALREVENUE
+    	test2.Name= 'Conta Teste Trigger Maluco2'; 
+    	test2.Rating = 'Hot';
+    	test2.Phone = '8899554466';
+    }
+    @IsTest
+    Public Static Void TestPhoneAccount(){
+        Account test3= New Account();
+        //TESTE SEM O PHONE 
+    	test3.Name= 'Conta Teste Trigger Maluco3'; 
+    	test3.Rating = 'Hot';
+        test3.AnnualRevenue = 1000;
+    }
+     @IsTest
+    Public Static Void TestAnnualRevenueNegativaAccount (){
+    	Account test4 = New Account();
+        //TESTE SEM ERRO
+    	test4.Name= 'Conta Teste Trigger Maluco'; 
+    	test4.Rating = 'Hot';
+    	test4.Type = 'Prospect';
+    	test4.AnnualRevenue = -1000;
+    	test4.Phone = '8899554466';    
+    }
+}
