@@ -1,55 +1,5 @@
-Atividade 22/06/2022
+ATIVIDADE 10 - 22-06-2022 - IF ELSE
 
-integer variavel = 1;
-System.debug('Número ' + variavel);
-if(variavel>0){
-    System.debug('Número positivo');}
-else if(variavel<0){System.debug('Número negativo');}
-else{System.debug('Valor = zero');}
-variavel--;
-if(variavel>0){
-    System.debug('Número positivo');}
-else if(variavel<0){System.debug('Número negativo');}
-else{System.debug('Valor = zero');}
-variavel--;
-if(variavel>0){
-    System.debug('Número positivo');}
-else if(variavel<0){System.debug('Número negativo');}
-else{System.debug('Valor = zero');}
-
-----------------------------------------------------
-//criar duas variáveis que leia duas notas, n1 e n2
-//calcule a média
-//media >=7 'você foi aprovado'
-//media = 10 'você manja demais
-//media <=7  'não foi dessa vez'
-
-decimal av1 = 5.8;
-decimal av2 = 8.7;
-decimal av3 = 9.5;
-decimal media1 = ((av1*5)+(av2*3)+(av3*2))/10;
-decimal media2 = ((av1*2)+(av2*3)+(av3*5))/10;
-decimal media3 = (av1 + av2 + av3)/3;
-string aluno = 'Pedro Henrique Varejão Cortizo Mocock';
-string prof = 'Renan Mussato';
-system.debug('nota av3 do aluno ' + aluno + ' ' + av3);
-system.debug('media 1 ' + media1);
-system.debug('media 2 ' + media2);
-system.debug('media 3 ' + media3);
-
-if(media1>=7.00){system.debug(prof + ' aprovou ' + aluno);}
-else if(media1==10.00){System.debug(prof + ' disse que ' + aluno + 'manja muito');}
-else {System.debug(prof + ' reprovou ' + aluno + ' não foi dessa vez');}
-
-if(media2>=7.00){system.debug(prof + ' aprovou ' + aluno);}
-else if(media2==10.00){System.debug(prof + ' disse que ' + aluno + 'manja muito');}
-else {System.debug(prof + ' reprovou ' + aluno + ' não foi dessa vez');}
-
-if(media3>=7.00){system.debug(prof + ' aprovou ' + aluno);}
-else if(media3==10.00){System.debug(prof + ' disse que ' + aluno + 'manja muito');}
-else {System.debug(prof + ' reprovou ' + aluno + ' não foi dessa vez');}
-
------------------------------------------------------------------
 //1. Defina um valor e escreva a mensagem ‘É MAIOR QUE 10!’ se o valor lido for maior
 //que 10, caso contrário escrever NÃO É MAIOR QUE 10!
 integer Valor = 7;
