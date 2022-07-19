@@ -1,0 +1,253 @@
+//ATIVIDADE 23 - ATIVIDADE HTML
+
+//Q1 A B
+
+<html>
+    <head Lang="pt-br">
+        <meta charset="UTF - 8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewreport" content="width=device-width, initial-scale=1.0 ">
+        <title>
+            Atividade 19/07/2022 Exemplo 2
+        </title>
+    </head>
+    <body>
+        <p>
+            Q1. MONTE AS PÁGINAS EM HTML DE ACORDO COM AS IMAGENS ABAIXO <br>
+            A. <br>
+            <i> Exemplos de cabeçalhos</i>
+        </p>
+        <h1>
+            Header 1
+        </h1>
+        <h2>
+            Header 2
+        </h2>
+        <h3>
+            Header 3
+        </h3>
+        <h4>
+            Header 4
+        </h4>
+        <h5>
+            Header 5
+        </h5>
+        <h6>
+            Header 6
+        </h6>
+        <p>
+            B.
+        </p>
+        <p><b>
+            Algumas marcas (em bold por exemplo!!!)
+        </b></p>
+        <p><i>
+            Este parágrafo está em itálico
+        </i></p>
+        <p><u>
+            Parágrafo Sublinhado
+        </u></p>
+        <p><big><b> Utilizando a marca big</big></b> e a marca small<small>2</small></p>
+        <p> Mais uma marca que permite apresentar experssões do género x <sup>2</sup>
+        e x <sub>2</sub></p>
+        <p>Exemplos de caracteres especiais. <br>
+        á à ã â ç é è õ
+        </p>
+    </body>
+</html>
+
+---------------------------------------------------------
+//Q2 C
+
+<html>
+    <head Lang="pt-br">
+        <meta charset="UTF - 8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewreport" content="width=device-width, initial-scale=1.0 ">
+        <title>
+            Atividade 19/07/2022 Exemplo 2
+        </title>
+    </head>
+    <body>
+        <h1>
+            <b>
+                <center>
+                    Café Starbuzz
+                </center>
+            </b>
+        </h1>
+        <h3>
+            <b>
+                Mistura de Casa, R$ 1,49
+            </b>
+        </h3>
+        <h4>
+            <i>
+                Uma mistura suave e delicada de cafés do Méximo, Bolívia e Guatemala.
+            </i>
+        </h4>
+        <h3>
+            <b>
+                Café arábico com leite, R$ 2,35
+            </b>
+        </h3>
+        <h4>
+            <i>
+                Expresso, leite fervido e xarope de chocolate.
+            </i>
+        </h4>
+        <h3>
+            <b>
+                Cappucino, R$ 1,89
+            </b>
+        </h3>
+        <h4>
+            <i>
+                Uma mistura de expresso, leite fervido e espuma.
+            </i>
+        </h4>
+        <h3>
+            <b>
+                Cappucino, R$ 1,89
+            </b>
+        </h3>
+        <h4>
+            <i>
+                Uma bebida condimenta com chá preto, especiarias, leite e mel.
+            </i>
+        </h4>
+    </body>
+</html>
+
+----------------------------------------------------------
+//Q3 D
+
+<HTMl>
+    <head Lang="pt-br">
+        <meta charset="UTF - 8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewreport" content="width=device-width, initial-scale=1.0 ">
+        <title>
+            Atividade 19/07/2022 Exemplo 2
+        </title>
+    </head>
+    <h1>
+        <b>
+            BRIGADEIRO <br>
+        </b>
+        <img src="BRIGADEIRO.png">
+    </h1>
+    <h3>
+        <b>
+            INGREDIENTES
+        </b>
+    </h3>
+    <h4>
+        <ul>
+            <li>1 caixa de leite condensado</li>
+            <li>1 colher (sopa) de <b>margarina sem sal</b></li>
+            <li>7 colheres (sopa) de achocolatado ou 4 colheres (sopa) de chocolate em pó</li>
+            <li>Chocolate Granulado</li>
+        </ul>
+    </h4>
+    <h3>
+        MODO DE PREPARO
+    </h3>
+    <h4>
+        <ol>
+            <li>Em uma panela funda, acrescente o leite condensado, a margarina e o chocolate em pó</li>
+            <li>Cozinhe em fogo médio e mexa até que o brigadeiro comece a desgrudar da panela</li>
+            <li>Deixe esfriar e <u style="color:orange">faça pequenas bolas</u> com a mão passando a massa no chocolate granulado</li>
+        </ol>
+    </h4>
+</HTMl>
+
+----------------------------------------------------------------
+//Q4 E
+
+<html>
+    <head Lang="pt-br">
+        <meta charset="UTF - 8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewreport" content="width=device-width, initial-scale=1.0 ">
+        <title>
+            ATIVIDADE 23 - ATIVIDADE HTML E
+        </title>
+    </head>
+    <ol>
+        <li>
+            Lucas Santana
+            <ul>
+                <li>Matenática</li>
+                <li>Química</li>
+                <li>Física</li>
+            </ul>
+        </li>
+        <li>
+            Gabriel Torres
+            <ul>
+                <li>Filosofia</li>
+                <li>Sociologia</li>
+                <li>Geografia</li>
+            </ul>
+        </li>
+        <li>
+            Fernando Pessoa
+            <ul>
+                <li>Aquicultura</li>
+            </ul>
+        </li>
+    </ol>
+</html>
+
+-----------------------------------------------------
+//Q5 F
+
+<html>
+    <head Lang="pt-br">
+        <meta charset="UTF - 8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewreport" content="width=device-width, initial-scale=1.0 ">
+        <title>
+            ATIVIDADE 23 - ATIVIDADE HTML E
+        </title>
+    </head>
+    <h1>
+        Queima de estoque do iFome
+    </h1>
+    <hr>
+    <br>
+    <H2>
+        <b>
+            Lula no Palito
+        </b>
+    </H2>
+    <h3>
+        100 palitos de Lula, ao molho de marisco <br>
+        <img src="LULA NO PALITO.png">
+    </h3>
+    <h4>
+        DE <s>R$ 119,99</s> <br>
+        <b>POR 99,99</b>
+    </h4>
+    <br>
+    <hr>
+    <br>
+    <h2>
+        <i>
+            Apex Burger
+        </i>
+    </h2>
+    <h3>
+        <i>
+            2 hambúrgueres de 250g, molho babercue,  molho de bacon, molho de pimenta, pão e bacon, maionese temperada com bacon <br>
+        </i>        
+        <img src="APEX BURGER.png">
+    </h3>
+    <h4>
+        DE <s>R$ 79,99</s> <br>
+        <b>POR 59,99</b>
+    </h4>
+</html>
+
+
