@@ -1,0 +1,363 @@
+//19-07-2022 - FELIPÃO HTML VSCODE (sangue de abraão)
+
+//FELIPE CÓDIGO 1
+
+/*
+	Classe controladora da Trigger	(Handler)
+	
+	O nome da classe e os métodos recebem a nomeclatura Handler ao final
+	Ex: LeadTriggerHandler, beforeInsertHandler()
+
+	A classe não entende a nomeclatura de trigger, é específico de trigger.
+	Ex: Trigger.new, Trigger.OldMap
+
+	Os loops de repetição na trigger, fazem uso de Trigger.new, porém, a classe não consegue 
+	usar essa nomeclatura.
+	Lembrando que o Trigger.new é uma lista do Objeto da trigger, e o método classe deverá 
+	receber como parâmetro uma lista de valores que devem ser repassados através da trigger.
+	
+	Ou seja, a trigger enviará para a função a (trigger.New) que será usada dentro da função através
+	da lista existente nos parâmetros.
+	Ex: List<Lead> triggerNew
+	
+*/
+
+public class LeadTriggerHandler {
+    //Método estático para before insert
+    /*
+		List<Lead> triggerNew -> recebe os valores da trigger através da (Trigger.new), para
+		realizar as operações.
+	*/
+    public static void beforeInsertHandler(List<Lead> triggerNew){
+        for(Lead lead: triggerNew){
+            if(String.isBlank(lead.Phone) && String.isBlank(lead.MobilePhone)){
+                lead.addError('Deve ter pelo menos um contato (telefone ou celular) cadastrado');
+            } 
+            
+            if(String.isBlank(lead.rating)){
+                lead.Rating = 'Cold';
+            }
+            
+            if(lead.AnnualRevenue < 0){
+                lead.AnnualRevenue.addError('Não pode ser negativo');
+            }
+            
+            if(lead.AnnualRevenue == null){
+                lead.AnnualRevenue = 0;
+            }
+            
+        }
+    }
+    
+    //Método estático para before update
+    /*
+		List<Lead> triggerNew -> recebe os valores da trigger através da (Trigger.new), para
+		realizar as operações.
+		Map<Id, Lead> triggerOldMap -> recebe os valores anterioes da trigger através da (Trigger.oldMap), 
+		para realizar as operações
+	*/
+    
+    public static void beforeUpdateHandler(List<Lead> triggerNew, Map<Id, Lead> triggerOldMap){
+        for(Lead lead: triggerNew){
+            if(triggerOldMap.get(lead.id).status == 'Open - Not Contacted' && (lead.status == 'Closed - Converted' || lead.status == 'Closed - Not Converted' )){
+                lead.addError('Você não pode FECHAR um lead como CONVERTIDO ou NÃO CONVERTIDO, sem entrar em contato primeiro');
+            }
+        }
+    }
+    
+    
+    //Método estático para after insert
+    /*
+		List<Lead> triggerNew -> recebe os valores da trigger através da (Trigger.new), para
+		realizar as operações.
+	*/
+    public static void afterInsertHandler(List<Lead> triggerNew){
+        List<Task> listTask = new List<Task>();
+		
+        for(Lead lead : triggerNew){
+            if(lead.status == 'Open - Not Contacted'){
+                Task t = new Task(
+                	Subject = 'Entrar em contato nos próximos dias',
+                    WhoId = lead.Id
+                );
+                
+                listTask.add(t);
+            }
+        }
+        
+        insert listTask;
+    }
+}
+
+
+------------------------------------------------------------------------
+//FELIPE CÓDIGO 2
+
+trigger LeadTrigger on Lead (before insert, after insert, before update){
+    /*
+		Trigger chamando os métodos da classe controladora LeadTriggerHandler
+
+		A Trigger fica completamente limpa, retirando a responsabilidade dela para efetuar operações.
+		Basta chamar a classe.metodo(parametros) que vc deseja utilizar
+		eX: LeadTriggerHandler.beforeInsertHandler(Trigger.new);
+		
+	*/
+    
+    //before_insert
+    if(Trigger.isBefore && Trigger.isInsert){
+        //Trigger.new -> será passada para a função que realiza as operações de acordo com os dados passados
+        LeadTriggerHandler.beforeInsertHandler(Trigger.new);
+    }
+    
+    //after_insert
+    if(Trigger.isAfter && Trigger.isInsert){
+        //Trigger.new -> será passada para a função que realiza as operações de acordo com os dados passados
+        LeadTriggerHandler.afterInsertHandler(Trigger.new);
+    }
+    
+    //before_update
+    if(Trigger.isBefore && Trigger.isUpdate){
+        //Trigger.new -> será passada para a função que realiza as operações de acordo com os dados passados
+        //Trigger.oldMap -> será passada para a função que realiza as operações de acordo com os dados passados
+        LeadTriggerHandler.beforeUpdateHandler(Trigger.new, Trigger.oldMap);
+    }  
+    
+ }
+
+
+ ---------------------------------------------------------------------------------
+ //HTML EXEMPLOS
+
+ //HTML FELIPÃO EXEMPLO
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu primeiro codiguin</title>
+</head>
+<body>
+    <!--
+        p - paragrafo
+        br - quebra de linha
+            titulo e subtitulos
+            h1, h2, h3, h4, h5, h6
+maior o texto ______________ menor o texto
+        b - negrito
+        i - italico
+        u - sublinhado
+        s - tracejado
+        sub -
+        sup - 
+        hr - linha horizontal
+    -->
+    <h1>Titulo H1</h1>
+    <h2>Titulo H2</h2>
+    <h3>Titulo H3</h3>
+    <h4>Titulo H4</h4>
+    <h5>Titulo H5</h5>
+    <h6>Titulo H6</h6>
+
+    <h1>Artigo X</h1>
+    <h3><u>Já chegou o disco voador</u></h3>
+    <hr>
+    
+    <p><b>Lorem</b> ipsum dolor sit amet consectetur adipisicing elit. <i>Provident</i> consequatur est, fuga illum, quidem mollitia aspernatur vitae, nobis iure cumque amet rem? Cupiditate aliquid provident deserunt culpa animi, est tempora!</p>
+
+    <p><b><i><s>Esse trecho deve estar com paragrafo, negrito, italico e tracejado</s></i></b></p>
+
+    <p>Proximo <sub>Paragrafo</sub></p>
+    <p>Proximo <sup>Paragrafo</sup></p>
+
+    <p>X <sup>2</sup></p>
+    <p>X <sub>2</sub></p>
+    
+
+
+
+
+
+
+</body>
+</html>
+
+ //MinhaPagina
+
+ <html>
+    <head lang= "pt-br">
+        <meta charset="UTF - 8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewreport" content="width=device-width, initial-scale=1.0 ">
+
+        <title>
+            Meu primeiro codiguin HTML
+        </title>
+    </head>
+    <body>
+        <p>
+            Hello World
+        </p>
+        <p>
+            While life still not easy
+        </p>
+        <p>
+            I'll keep it rough
+        </p>
+        <!--
+            COMENTÁRIOS, estrutura de comentário <! -- e o comentário vai entre -- >
+        -->
+        <!--
+            <p> Paragraph </p> Abre e fecha e o código vai no meio
+            <br> Break - quebra de linha
+            Títulos e subtítulos
+            h - Heading - Cabeçalho
+            h1 h2 h3 h4 h5 h6
+Maior o texto _________________ Menor o texto
+            b - Black - Negrito
+            i - Itálic - Itálico
+            u - Underline - Sublinhado
+            s - Stroke - Tracejado
+
+        -->
+        <h1>Título H1</h1>
+        <h2>Título H2</h2>
+        <h3>Título H3</h3>
+        <h4>Título H4</h4>
+        <h5>Título H5</h5>
+        <h6>Título H6</h6>
+        <h1>
+            Artigo X
+        </h1>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus repellat reiciendis reprehenderit iusto distinctio, ullam molestiae tenetur saepe ab, doloremque recusandae temporibus suscipit, alias maxime.<br> Beatae distinctio quo quis error.
+        </p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed quae paliquam perferendis harum excepturi fugiat repellat ab. Eveniet, consectetur? Enim reiciendis nihil quia consequatur quos maiores alias sunt eaque inventore.</p>
+        <p><b><i><u><s>Esse texto deve estar em negrito, itálico, sublinhado e tracejado.</s></u></i></b></p>
+        <p>Próximo parágrafo</p>
+        <p>Próximo <sup>Parágrafo</sup></p>
+        <!--
+
+            <sup> Superscripting </sup> Element - Sobrescrever
+            <hr> Horizontal Row
+               
+        -->
+
+    </body>
+</html>
+
+-----------------------------------------------------------------
+//EXEMPLO 1 
+
+<html>
+    <head Lang="pt-br">
+        <meta charset="UTF - 8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewreport" content="width=device-width, initial-scale=1.0 ">
+        <title>
+            Atividade 19/07/2022 Exemplo 1
+        </title>
+    </head>
+    <body>
+        <h1><b><center>
+            Lorem ipsum
+        </center>
+        </b></h1>
+        <h5>
+            <i><center>
+            "dolor sit amet consectetur adipisicing elit. Nemo, ullam quod commodi consectetur libero eligendi consequatur, porro placeat a eveniet eaque dicta magnam expedita labore, corporis provident. Ipsum, ipsam voluptas!"
+            </center></i>
+        </h5>
+        <h6>
+            <I>
+                "A dor em si é importante para a elite adipisical principal. Ninguém terá qualquer vantagem que resulte na liberdade de escolher o principal, mas chegará a uma conclusão agradável, e essas declarações proporcionam um grande esforço livre do corpo. Muito, muito prazer"
+            </I>
+        </h6>
+        <HR></HR>
+        <H2>
+            O que é Lorem Ipsum?
+        </H2>
+        <p>
+            O Lorem Ipsum é um texto modelo da indústria tipográfica-e de impressão. O Lorem Ipsum tem vindo a ser o texto padrão usado por estas indústrias desde o ano de 1500, quando uma misturou os caracteres de um texto para criar um espécime de livro 
+        </p>
+    </body>
+</html>
+
+-------------------------------------------------------------------------------------
+//EXEMPLO 2
+
+<html>
+    <head Lang="pt-br">
+        <meta charset="UTF - 8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewreport" content="width=device-width, initial-scale=1.0 ">
+        <title>
+            Atividade 19/07/2022 Exemplo 2
+        </title>
+    </head>
+    <body>
+        <h1>
+            <CENTer>
+                ATIVIDADE 2 19-07-2022
+            </CENTer>
+        </h1>
+        <H2>
+            <B>
+                Lista de Redes Sociais
+            </B>
+        </H2>
+        <h3>
+            <i>
+                <ul>
+                    <li>
+                        <a href="https://www.facebook.com/pedro.mocock/">
+                            Facebook - Pedro Mocock
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/pmocock/">
+                            Instagram - Pedro Mocock
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/evil.soldiers/">
+                            Instagram - Evil Soldiers Motorcycle Club
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/pmocock/">
+                            Linkedin - Pedro Mocock
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/PMocock">
+                            Github - Pedro Mocock
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/channel/UCk_KidPsari0avT8Qbyqkqg">
+                            Youtube - Pedro Mocock
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://slsblh.blogspot.com/">
+                            Blogspot - Shine Like Sun Burn Like Hell
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://trailblazer.me/id/pmocock">
+                            TrailBlazer - Pedro Mocock
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/PMocockDev">
+                            Twitter -Pedro Mocock
+                        </a>
+                    </li>
+                    
+                </ul>
+            </i>
+        </h3>
+    </body>
+</html>

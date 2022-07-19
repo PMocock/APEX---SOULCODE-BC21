@@ -1,0 +1,73 @@
+//19-07-2022 TEST CLASS
+
+//CLASSE CALC
+
+public class CALC {
+    Public Static Decimal Sum (Decimal A,Decimal B){
+        Return A + B;
+    }
+    Public Static Decimal Sub (Decimal A,Decimal B){
+        Return A - B;        
+    }
+    Public Static Decimal Div (Decimal A,Decimal B){
+        If(A != 0 && B != 0){
+        	Return A / B;    
+        }Else {
+            System.debug('Não pode dividir por 0');
+            Return 0;
+        }
+    }
+    Public Static Decimal Mul (Decimal A,Decimal B){
+        Return A * B;        
+    }
+}
+
+----------------------------------------------------
+//APEX TESTE
+
+System.debug('10 + 5 = ' + CALC.Sum(10,5));
+System.debug('10 / 5 = ' + CALC.Div(10, 5));
+System.debug('10 / 0 = ' + CALC.Div(10, 5));
+System.debug('10 - 5 = ' + CALC.Sub(10, 5));
+System.debug('10 * 5 = ' + CALC.Mul(10, 5));
+System.debug(((CALC.Sum(10,5))+CALC.Sub(10, 5)) * ((CALC.Div(10, 5))*CALC.Mul(10, 5)));
+
+----------------------------------------------------
+//CLASSE TESTE
+
+@IsTest
+public class CALCTest {
+    @IsTest
+    Public Static Void TestSum(){
+        Decimal Res = CALC.Sum(1, 1);
+        System.assert(Res == 2, 'Se Sum não está funcionando');
+        System.assertEquals(2, Res, 'Se Sum não está funcionando');
+    }
+    @IsTest
+    Public Static Void TestSub(){
+        Decimal Res = CALC.Sub(2, 1);
+        System.assert(Res == 1, 'Se Sub não está funcionando');
+        System.assertEquals(1, Res, 'Se Sub não está funcionando');
+    }
+    @IsTest
+    Public Static Void TestDiv(){
+        Decimal Res = CALC.Div(4, 2);
+        System.assert(Res == 2, 'Se Div não está funcionando');
+        System.assertEquals(2, Res, 'Se Div não está funcionando');
+    }
+    @IsTest
+    Public Static Void TestDiv0(){
+        Decimal Res = CALC.Div(4, 0);
+        System.assert(Res == 0, 'Se Div por 0 não está funcionando');
+        System.assertEquals(0, Res, 'Se Div por 0 não está funcionando');
+    }
+    @IsTest
+    Public Static Void TestMul(){
+        Decimal Res = CALC.Mul(2, 1);
+        System.assert(Res == 2, 'Se Mult não está funcionando');
+        System.assertEquals(2, Res, 'Se Mult não está funcionando');
+    }
+}
+
+
+
