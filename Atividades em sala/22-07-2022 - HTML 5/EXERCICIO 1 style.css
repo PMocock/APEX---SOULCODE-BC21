@@ -1,0 +1,37 @@
+body{
+    background-color: cornsilk;
+}
+p{
+    color: #123abc;
+    background-color: black;
+    font-size: 15px;
+    font-family: 'Times New Roman', Times, serif;
+}
+h1{
+    color: red;
+    background-color: cyan;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+h2{
+    font-Variant: smallcaps;
+    font-size: 700;
+    color: #affbbb;
+    font-family: 'Times New Roman', Times, serif;
+}
+h3{
+    background-color: #654456;
+    color: rgb 0, 255, 100;
+    font-size: 20pt;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.h1Doidao{
+    color: pink;
+    background-color: red;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.cabecalho{
+    color: black;
+    background-color: whitesmoke;
+    font-size: 50%;
+
+}
