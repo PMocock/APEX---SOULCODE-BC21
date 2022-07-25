@@ -1,0 +1,84 @@
+.p1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+}
+
+.p2{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: large;
+}
+
+.p3{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+}
+
+.p4{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: small;
+}
+
+.p5{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: x-small;
+}
+
+.p6{
+    font-family: fantasy;
+    font-size: xx-small;
+}
+.r1{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: larger;
+    font-style: normal;
+    font-weight: 800;
+}
+.r2{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: small;
+    font-style: italic;
+    font-weight: 200;
+}
+
+.r3{
+    font-family: monospace;
+    font-size: normal;
+    font-style: oblique;
+    font-weight: 500;
+}
+.r4{
+    font-family: fantasy;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: 400;
+}
+.T1{
+    font-family: fantasy;
+    font-size: larger;
+    font-style: oblique;
+    font-weight: 500;
+}
+.T2{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+.T3{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: medium;
+    font-style: italic;
+}
+.T4{
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: small;
+    color: green;
+}
+.T5{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: blue;
+    font-size: small;
+}
+.T6{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(49, 21, 21);
+    font-size: small;
+}
