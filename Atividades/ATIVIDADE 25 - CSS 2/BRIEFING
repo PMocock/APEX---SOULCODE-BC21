@@ -1,0 +1,35 @@
+ATIVIDADE 25 - CSS 2 - 25-07-2022 - PEDRO MOCOCK
+
+<!-- QUESTÃO 1
+Criar uma página que contenha 06 parágrafos, cada parágrafo devera conter uma font-family diferente, com tamanho fonte de acordo com a ordem abaixo:
+1.30px
+2 large
+3.medium
+4.small
+5.x-small
+6.xx-small
+
+
+
+
+QUESTÃO 02
+Crie um Html com CSS que contenha os requisitos abaixo utilizando o assunto receita de bolo: Pode utilizar Css Inline , interno ou externo
+Utilizando <p> crie :
+1.Paragrafo com fonte familia Courier , tamanho larger , estilo normal e grossura 800
+2.Paragrafo com fonte familia Verdana , tamanho small , estilo Italico e grossura 200
+3.Paragrafo com fonte familia monospace, tamanho normal , estilo oblicuo e grossura 500
+4.Paragrafo com fonte familia Fantasy , tamanho X-small , estilo normal e grossura 400
+
+
+
+QUESTÃO 03
+Utilizando CSS interno ou externo atenda os requisitos abaixo:
+Crie uma receita (obrigatório)
+ utilizando os comandos de manipulação de fonte
+1. O texto deve ser alinhado ao centro
+2. Utilize o h1 para dizer o nome da receita e nele insira uma fonte(familia) diferente dos demais elementos
+3.um dos ingredientes deve ter uma linha riscada
+4. Deve se colocar  na fonte cores de acordo com a prioridade dos ingredientes (Verde - obrigatorios / azul - a gosto)
+5.O tempo de preparo deve ser em itálico 
+6. Para fins de estética visual pode se utilizar elementos background -->
+html
